@@ -1,3 +1,4 @@
+```html
 <!doctype html>
 <html lang="en">
 <head>
@@ -18,7 +19,6 @@
 
     <canvas id="game"></canvas>
 
-    <!-- HUD -->
     <section id="hud" class="hud">
 
       <div class="hud-item">
@@ -27,23 +27,26 @@
       </div>
 
       <div class="hud-item">
-        <span>BEST</span>
-        <b id="best">0</b>
+        <span>LEVEL</span>
+        <b id="level">1</b>
       </div>
 
       <div class="hud-item">
         <span>LIVES</span>
-        <b id="lives">3</b>
+        <b id="hp">5</b>
       </div>
 
-      <button id="pauseBtn" class="hud-btn">
+      <div class="hud-item progress-box">
+        <span>PROGRESS</span>
+        <b id="progress">0/12</b>
+      </div>
+
+      <button id="pauseBtn" class="hud-btn" type="button">
         Ⅱ
       </button>
 
     </section>
 
-
-    <!-- START SCREEN -->
     <section id="startScreen" class="overlay">
 
       <div class="card">
@@ -59,21 +62,19 @@
           and shoot them down.
         </p>
 
-        <button id="startBtn" class="primary">
+        <button id="startBtn" class="primary" type="button">
           START GAME
         </button>
 
         <p class="hint">
           Desktop: WASD / Arrow Keys + Space<br>
-          Mobile: drag to move + hold FIRE
+          Mobile: drag to move + FIRE
         </p>
 
       </div>
 
     </section>
 
-
-    <!-- GAME OVER -->
     <section id="gameOverScreen" class="overlay hidden">
 
       <div class="card">
@@ -85,10 +86,10 @@
         </p>
 
         <p class="result">
-          Best: <b id="finalBest">0</b>
+          Level: <b id="finalLevel">1</b>
         </p>
 
-        <button id="restartBtn" class="primary">
+        <button id="restartBtn" class="primary" type="button">
           PLAY AGAIN
         </button>
 
@@ -96,23 +97,21 @@
 
     </section>
 
-
-    <!-- MOBILE CONTROLS -->
     <section id="touchControls" class="touch-controls">
 
       <div class="move-pad">
 
-        <button data-dir="up">▲</button>
+        <button type="button" data-dir="up">▲</button>
 
         <div>
-          <button data-dir="left">◀</button>
-          <button data-dir="down">▼</button>
-          <button data-dir="right">▶</button>
+          <button type="button" data-dir="left">◀</button>
+          <button type="button" data-dir="down">▼</button>
+          <button type="button" data-dir="right">▶</button>
         </div>
 
       </div>
 
-      <button id="fireBtn" class="fire">
+      <button id="fireBtn" class="fire" type="button">
         FIRE
       </button>
 
@@ -122,5 +121,72 @@
 
   <script src="game.js"></script>
 
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+
+      const startScreen =
+        document.getElementById("startScreen");
+
+      const gameOverScreen =
+        document.getElementById("gameOverScreen");
+
+      const startBtn =
+        document.getElementById("startBtn");
+
+      const restartBtn =
+        document.getElementById("restartBtn");
+
+      const finalScore =
+        document.getElementById("finalScore");
+
+      const finalLevel =
+        document.getElementById("finalLevel");
+
+      startBtn.addEventListener("click", () => {
+
+        startScreen.classList.add("hidden");
+
+        if (typeof startGame === "function") {
+          startGame();
+        }
+
+      });
+
+      restartBtn.addEventListener("click", () => {
+
+        gameOverScreen.classList.add("hidden");
+
+        if (typeof startGame === "function") {
+          startGame();
+        }
+
+      });
+
+      const originalGameOver =
+        window.gameOver;
+
+      window.gameOver = function () {
+
+        if (typeof originalGameOver === "function") {
+          originalGameOver();
+        }
+
+        finalScore.textContent =
+          typeof score !== "undefined"
+            ? score
+            : 0;
+
+        finalLevel.textContent =
+          typeof level !== "undefined"
+            ? level
+            : 1;
+
+        gameOverScreen.classList.remove("hidden");
+      };
+
+    });
+  </script>
+
 </body>
 </html>
+```
