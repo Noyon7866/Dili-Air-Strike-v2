@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+
+  <meta name="theme-color" content="#07112b">
+
+  <title>Dli Air Strike — Plane Shooter</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <main class="game-shell">
+
+    <canvas id="game"></canvas>
+
+    <!-- HUD -->
+    <section id="hud" class="hud">
+
+      <div class="hud-item">
+        <span>SCORE</span>
+        <b id="score">0</b>
+      </div>
+
+      <div class="hud-item">
+        <span>BEST</span>
+        <b id="best">0</b>
+      </div>
+
+      <div class="hud-item">
+        <span>LIVES</span>
+        <b id="lives">3</b>
+      </div>
+
+      <button id="pauseBtn" class="hud-btn">
+        Ⅱ
+      </button>
+
+    </section>
+
+
+    <!-- START SCREEN -->
+    <section id="startScreen" class="overlay">
+
+      <div class="card">
+
+        <div class="logo-wrap">
+          <img src="assets/player.png" alt="Dli Player">
+        </div>
+
+        <h1>DLI AIR STRIKE</h1>
+
+        <p>
+          Take control, dodge incoming Dli coins
+          and shoot them down.
+        </p>
+
+        <button id="startBtn" class="primary">
+          START GAME
+        </button>
+
+        <p class="hint">
+          Desktop: WASD / Arrow Keys + Space<br>
+          Mobile: drag to move + hold FIRE
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <!-- GAME OVER -->
+    <section id="gameOverScreen" class="overlay hidden">
+
+      <div class="card">
+
+        <h2>GAME OVER</h2>
+
+        <p class="result">
+          Score: <b id="finalScore">0</b>
+        </p>
+
+        <p class="result">
+          Best: <b id="finalBest">0</b>
+        </p>
+
+        <button id="restartBtn" class="primary">
+          PLAY AGAIN
+        </button>
+
+      </div>
+
+    </section>
+
+
+    <!-- MOBILE CONTROLS -->
+    <section id="touchControls" class="touch-controls">
+
+      <div class="move-pad">
+
+        <button data-dir="up">▲</button>
+
+        <div>
+          <button data-dir="left">◀</button>
+          <button data-dir="down">▼</button>
+          <button data-dir="right">▶</button>
+        </div>
+
+      </div>
+
+      <button id="fireBtn" class="fire">
+        FIRE
+      </button>
+
+    </section>
+
+  </main>
+
+  <script src="game.js"></script>
+
+</body>
+</html>
